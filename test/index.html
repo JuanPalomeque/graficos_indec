@@ -3,9 +3,338 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test</title>
+    <title>Mercado Eléctrico Argentino</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #0f1923;
+            color: #e0e6ef;
+            line-height: 1.7;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1a2e4a 0%, #0d1f33 100%);
+            border-bottom: 3px solid #00aaff;
+            padding: 48px 32px 40px;
+            text-align: center;
+        }
+
+        header .tag {
+            display: inline-block;
+            background: #00aaff22;
+            color: #00aaff;
+            border: 1px solid #00aaff55;
+            border-radius: 20px;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 4px 16px;
+            margin-bottom: 20px;
+        }
+
+        header h1 {
+            font-size: 2.6rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 12px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            color: #8aa3bf;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 48px 24px;
+        }
+
+        /* KPI cards */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+
+        .kpi-card {
+            background: #1a2e4a;
+            border: 1px solid #1e3a5f;
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .kpi-card:hover { transform: translateY(-4px); }
+
+        .kpi-card .value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #00aaff;
+            display: block;
+        }
+
+        .kpi-card .label {
+            font-size: 0.82rem;
+            color: #8aa3bf;
+            margin-top: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Sections */
+        .section {
+            background: #1a2e4a;
+            border: 1px solid #1e3a5f;
+            border-radius: 14px;
+            padding: 32px;
+            margin-bottom: 24px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .icon-blue  { background: #00aaff22; }
+        .icon-green { background: #00cc6622; }
+        .icon-orange{ background: #ff880022; }
+        .icon-red   { background: #ff335522; }
+        .icon-purple{ background: #aa55ff22; }
+
+        .section h2 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .section p {
+            color: #b0c4d8;
+            font-size: 0.97rem;
+            margin-bottom: 12px;
+        }
+
+        .section p:last-child { margin-bottom: 0; }
+
+        ul.bullets {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul.bullets li {
+            color: #b0c4d8;
+            font-size: 0.97rem;
+            padding: 6px 0 6px 20px;
+            border-bottom: 1px solid #1e3a5f;
+            position: relative;
+        }
+
+        ul.bullets li:last-child { border-bottom: none; }
+
+        ul.bullets li::before {
+            content: '›';
+            position: absolute;
+            left: 0;
+            color: #00aaff;
+            font-weight: 700;
+        }
+
+        /* Fuente matrix */
+        .matrix {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .matrix-item {
+            background: #0f1923;
+            border-radius: 8px;
+            padding: 14px 16px;
+        }
+
+        .matrix-item .src { font-size: 0.8rem; color: #8aa3bf; text-transform: uppercase; letter-spacing: 1px; }
+        .matrix-item .pct { font-size: 1.4rem; font-weight: 700; color: #00cc66; }
+        .matrix-item .name { font-size: 0.9rem; color: #b0c4d8; margin-top: 2px; }
+
+        /* Desafíos */
+        .challenge-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 4px;
+        }
+
+        .challenge-item {
+            background: #0f1923;
+            border-left: 3px solid #ff3355;
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-size: 0.92rem;
+            color: #b0c4d8;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 32px;
+            color: #4a6080;
+            font-size: 0.82rem;
+            border-top: 1px solid #1e3a5f;
+        }
+
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.8rem; }
+            .matrix, .challenge-list { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body>
-    <h1>Página de prueba</h1>
+
+<header>
+    <div class="tag">Presentación ejecutiva</div>
+    <h1>Mercado Eléctrico Argentino</h1>
+    <p>Resumen del sistema, estructura, fuentes de generación y perspectivas regulatorias</p>
+</header>
+
+<div class="container">
+
+    <!-- KPIs -->
+    <div class="kpi-grid">
+        <div class="kpi-card">
+            <span class="value">~170 TWh</span>
+            <span class="label">Demanda anual</span>
+        </div>
+        <div class="kpi-card">
+            <span class="value">~45 GW</span>
+            <span class="label">Capacidad instalada</span>
+        </div>
+        <div class="kpi-card">
+            <span class="value">SADI</span>
+            <span class="label">Sistema interconectado</span>
+        </div>
+        <div class="kpi-card">
+            <span class="value">CAMMESA</span>
+            <span class="label">Operador del mercado</span>
+        </div>
+    </div>
+
+    <!-- Estructura del mercado -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon icon-blue">⚡</div>
+            <h2>Estructura del mercado</h2>
+        </div>
+        <p>El Mercado Eléctrico Mayorista (MEM) fue creado en 1992 mediante la Ley 24.065, estableciendo un modelo desregulado basado en la competencia en generación y la regulación de transporte y distribución.</p>
+        <ul class="bullets">
+            <li><strong>Generación:</strong> mercado competitivo con contratos entre privados y despacho centralizado</li>
+            <li><strong>Transporte:</strong> monopolio natural regulado, operado por TRANSENER y transportistas regionales</li>
+            <li><strong>Distribución:</strong> concesiones provinciales y nacionales (EDENOR, EDESUR, etc.)</li>
+            <li><strong>CAMMESA:</strong> administra el despacho, las transacciones económicas y la operación técnica del SADI</li>
+        </ul>
+    </div>
+
+    <!-- Matriz energética -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon icon-green">🌿</div>
+            <h2>Matriz de generación</h2>
+        </div>
+        <p>La matriz argentina es diversificada, con predominancia de fuentes térmicas e hidráulicas, y un crecimiento sostenido de renovables desde la sanción de la Ley 27.191.</p>
+        <div class="matrix">
+            <div class="matrix-item">
+                <div class="src">Térmica</div>
+                <div class="pct">~58%</div>
+                <div class="name">Gas natural, fuel oil, carbón</div>
+            </div>
+            <div class="matrix-item">
+                <div class="src">Hidráulica</div>
+                <div class="pct">~22%</div>
+                <div class="name">Grandes aprovechamientos</div>
+            </div>
+            <div class="matrix-item">
+                <div class="src">Nuclear</div>
+                <div class="pct">~8%</div>
+                <div class="name">Atucha I, II y Embalse</div>
+            </div>
+            <div class="matrix-item">
+                <div class="src">Renovable</div>
+                <div class="pct">~12%</div>
+                <div class="name">Eólica, solar (RenovAr)</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Marco regulatorio -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon icon-purple">📋</div>
+            <h2>Marco regulatorio</h2>
+        </div>
+        <ul class="bullets">
+            <li><strong>Ley 24.065 (1992):</strong> crea el MEM y los organismos reguladores ENRE y ENARGAS</li>
+            <li><strong>ENRE:</strong> regula la generación, transporte y distribución eléctrica en jurisdicción nacional</li>
+            <li><strong>Secretaría de Energía:</strong> fija la política energética y los precios estacionales</li>
+            <li><strong>Ley 27.191 (2015):</strong> metas de generación renovable (20% para 2025)</li>
+            <li><strong>Programa RenovAr:</strong> licitaciones para incorporar capacidad renovable al SADI</li>
+        </ul>
+    </div>
+
+    <!-- Desafíos -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon icon-red">⚠️</div>
+            <h2>Principales desafíos</h2>
+        </div>
+        <div class="challenge-list">
+            <div class="challenge-item">Subsidios y distorsión tarifaria acumulada por más de una década</div>
+            <div class="challenge-item">Deuda del MEM y descalce financiero en CAMMESA</div>
+            <div class="challenge-item">Necesidad de inversión en transporte e infraestructura de red</div>
+            <div class="challenge-item">Dependencia de importaciones de gas para la generación térmica</div>
+            <div class="challenge-item">Integración de renovables intermitentes al sistema</div>
+            <div class="challenge-item">Déficit de generación en horas pico y contingencias de abastecimiento</div>
+        </div>
+    </div>
+
+    <!-- Perspectivas -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon icon-orange">🔭</div>
+            <h2>Perspectivas y oportunidades</h2>
+        </div>
+        <ul class="bullets">
+            <li>Expansión de Vaca Muerta como fuente de gas para generación y exportación</li>
+            <li>Proyectos de interconexión regional (exportación a Brasil, Chile y Uruguay)</li>
+            <li>Desarrollo de nuevas centrales hidroeléctricas en Patagonia (Cóndor Cliff, La Barrancosa)</li>
+            <li>Aumento de la capacidad renovable y reducción de costos de tecnologías solar y eólica</li>
+            <li>Proceso de normalización tarifaria y reducción gradual de subsidios energéticos</li>
+        </ul>
+    </div>
+
+</div>
+
+<footer>
+    Mercado Eléctrico Argentino · Resumen ejecutivo · 2025
+</footer>
+
 </body>
 </html>
